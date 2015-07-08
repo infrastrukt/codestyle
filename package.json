@@ -1,0 +1,9 @@
+{
+  "name": "ivelum-codestyle",
+  "version": "0.1.0",
+  "description": "ivelum codestyle",
+  "repository": "https://github.com/ivelum/codestyle",
+  "dependencies": {
+    "eslint": "0.24.0"
+  }
+}

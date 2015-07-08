@@ -1,0 +1,71 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import click
+from sarge import get_stdout, run
+
+stderr = click.get_text_stream('stderr')
+
+OK = 0
+FLAKE8_FAILED = 1
+CLOSURE_LINTER_FAILED = 2
+ESLINT_FAILED = 4
+
+
+def flake8(files):
+    if files:
+        click.echo('\n--- Flake8 ---')
+        if run('flake8 %s' % files).returncode:
+            stderr.write('> Flake8: FAIL\n')
+            return FLAKE8_FAILED
+        click.echo('> Flake8: ok')
+    return OK
+
+
+def closure_linter(files):
+    if files:
+        click.echo('\n--- Closure Linter ---')
+        gjslint = run('gjslint --flagfile .gjslint %s %s' % (
+            '-r' if not files.endswith('.js') else '',
+            files
+        ))
+        if gjslint.returncode:
+            stderr.write('> Closure Linter: FAIL\n')
+            return CLOSURE_LINTER_FAILED
+        click.echo('> Closure Linter: ok')
+    return OK
+
+
+def eslint(files):
+    if files:
+        click.echo('\n--- ESLint ---')
+        if run('eslint %s' % files).returncode:
+            stderr.write('> ESLint: FAIL\n')
+            return ESLINT_FAILED
+        click.echo('> ESLint: ok')
+    return OK
+
+
+@click.command()
+@click.argument('path', default='/code/')
+@click.option('--all/--changes', default=True,
+              help='Check all files (default) or changes only')
+def codestyle(path, all):
+    os.chdir(path)
+    py_files = js_files = '.'
+    if not all:
+        diff = get_stdout('git diff --name-only')
+        cached = get_stdout('git diff --cached --name-only')
+        files = set(diff.split('\n') + cached.split('\n'))
+        # Exclude non-existent files
+        files = [f for f in files if os.path.isfile(f)]
+        py_files = ' '.join([f for f in files if f.endswith('.py')])
+        js_files = ' '.join([
+            f for f in files if f.endswith('.js') or f.endswith('.jsx')
+        ])
+    sys.exit(flake8(py_files) + closure_linter(js_files) + eslint(js_files))
+
+
+if __name__ == '__main__':
+    codestyle()
