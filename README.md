@@ -17,11 +17,13 @@ Pull the image:
 $ docker pull ivelum/codestyle:latest
 ```
 
+The command above can be used later to update the image to newer version.
+
 ## Usage
 
 Create a `codestyle.sh` file in your project root:
 
-```sh
+```
 #!/usr/bin/env bash
 SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}/" )" && pwd )"
 docker run -v $SRC_DIR/:/code/ --rm ivelum/codestyle:latest $*
