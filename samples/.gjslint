@@ -1,0 +1,3 @@
+--nojsdoc
+--strict
+-e .git, .vagrant, htmlcov, node_modules, static
