@@ -60,10 +60,8 @@ def codestyle(path, all):
         files = set(diff.split('\n') + cached.split('\n'))
         # Exclude non-existent files
         files = [f for f in files if os.path.isfile(f)]
-        py_files = ' '.join([f for f in files if f.endswith('.py')])
-        js_files = ' '.join([
-            f for f in files if f.endswith('.js') or f.endswith('.jsx')
-        ])
+        py_files = ' '.join(f for f in files if f.endswith('.py'))
+        js_files = ' '.join(f for f in files if f.endswith(('.js', '.jsx')))
     sys.exit(flake8(py_files) + closure_linter(js_files) + eslint(js_files))
 
 
