@@ -20,4 +20,3 @@ RUN set -x \
 ENV PATH /usr/local/lib/node_modules/ivelum-codestyle/node_modules/.bin:$PATH
 COPY codestyle /bin/
 RUN chmod +x /bin/codestyle
-ENTRYPOINT ["/bin/codestyle"]
