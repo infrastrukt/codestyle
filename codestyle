@@ -40,7 +40,7 @@ def closure_linter(files):
 def eslint(files):
     if files:
         click.echo('\n--- ESLint ---')
-        if run('eslint %s' % files).returncode:
+        if run('eslint --ext .js --ext .jsx %s' % files).returncode:
             stderr.write('> ESLint: FAIL\n')
             return ESLINT_FAILED
         click.echo('> ESLint: ok')
