@@ -17,7 +17,7 @@ Pull the image:
 $ docker pull ivelum/codestyle:latest
 ```
 
-The command above can be used later to update the image to newer version.
+The command above can be also used later to update the image to newer version.
 
 ## Usage
 
