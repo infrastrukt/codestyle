@@ -10,6 +10,7 @@
     "node": true
   },
   "rules": {
-    "quotes": [1, "single"]
+    "quotes": [1, "single"],
+    "react/jsx-uses-react": 1
   }
 }
