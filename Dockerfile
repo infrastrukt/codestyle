@@ -15,7 +15,8 @@ RUN set -x \
     && find /usr/local \
 		\( -type d -a -name test -o -name tests \) \
 		-o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-		-exec rm -rf '{}' +
+		-exec rm -rf '{}' + \
+    && git config --global core.autocrlf true
 
 ENV PATH /usr/local/lib/node_modules/ivelum-codestyle/node_modules/.bin:$PATH
 COPY codestyle /bin/
