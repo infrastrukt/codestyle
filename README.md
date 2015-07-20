@@ -26,6 +26,12 @@ Create a `codestyle.sh` file in your project root:
 ```
 #!/usr/bin/env bash
 SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}/" )" && pwd )"
+
+# convert any windows path to linux style (c:/path, c:\path, /c/path => //c/path)
+if [[ ! "$(uname -a)" == *"Linux"* ]] && [[ ! "$(uname -a)" == *"Darwin"* ]] ; then
+    SRC_DIR=$(echo ${SRC_DIR} | sed 's/://g' | sed -r 's/\\/\//g' | sed -r 's/^[\/]*/\/\//')
+fi
+
 docker run -v $SRC_DIR/:/code/ --rm ivelum/codestyle:latest codestyle $*
 ```
 
@@ -72,6 +78,7 @@ This could very convenient to run fast codestyle checks automatically before eve
 This is pretty easy to do, just execute the following commands from your project root:
 
 ```sh
-$ echo './codestyle.sh --changes' > .git/hooks/pre-commit
+$ echo '#!/usr/bin/env bash' > .git/hooks/pre-commit
+$ echo './codestyle.sh --changes' >> .git/hooks/pre-commit
 $ chmod +x .git/hooks/pre-commit
 ```
