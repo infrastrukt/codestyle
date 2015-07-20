@@ -55,8 +55,8 @@ def codestyle(path, all):
     os.chdir(path)
     py_files = js_files = '.'
     if not all:
-        diff = get_stdout('git diff -b | grep "[+][+][+]" | cut -c7-')
-        cached = get_stdout('git diff --cached -b | grep "[+][+][+]" | cut -c7-')
+        diff = get_stdout('git diff --ignore-space-at-eol -- "*.py" "*.js" "*.jsx" | grep "[+][+][+]" | cut -c7-')
+        cached = get_stdout('git diff --cached --ignore-space-at-eol -- "*.py" "*.js" "*.jsx" | grep "[+][+][+]" | cut -c7-')
         files = set(diff.split('\n') + cached.split('\n'))
         # Exclude non-existent files
         files = [f for f in files if os.path.isfile(f)]
