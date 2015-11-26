@@ -74,7 +74,7 @@ For a quick start, check out our
 
 ## Add Git pre-commit hook
 
-This could very convenient to run fast codestyle checks automatically before every commit.
+It could be very convenient to run fast codestyle checks automatically before every commit.
 This is pretty easy to do, just execute the following commands from your project root:
 
 ```sh
