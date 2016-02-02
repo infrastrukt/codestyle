@@ -1,8 +1,7 @@
 ## Codestyle tools for Python & JavaScript
 
-Out-of-the-box Docker image with the following tools: [Flake8](http://flake8.readthedocs.org), 
-[Closure Linter](https://developers.google.com/closure/utilities/) and [ESLint](http://eslint.org). 
-Fully configurable and compatible with JSX.
+Out-of-the-box Docker image with the following tools: [Flake8](http://flake8.readthedocs.org)
+and [ESLint](http://eslint.org).  Fully configurable and compatible with ES6 and JSX.
 
 ## Installation
 
@@ -64,8 +63,6 @@ root:
 
 * setup.cfg or tox.ini - configuration and ignore options for 
   [Flake8](http://flake8.readthedocs.org/en/latest/config.html);
-* .gjslint - configuration and ignore options for 
-  [Closure Linter](https://developers.google.com/closure/utilities/docs/linter_howto);
 * .eslintignore - [ignore file for ESLint](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories);
 * .eslintrc - [configuration file for ESLint](http://eslint.org/docs/user-guide/configuring).
 

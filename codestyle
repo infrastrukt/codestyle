@@ -9,8 +9,7 @@ stderr = click.get_text_stream('stderr')
 
 OK = 0
 FLAKE8_FAILED = 1
-CLOSURE_LINTER_FAILED = 2
-ESLINT_FAILED = 4
+ESLINT_FAILED = 2
 
 
 def flake8(files):
@@ -20,20 +19,6 @@ def flake8(files):
             stderr.write('> Flake8: FAIL\n')
             return FLAKE8_FAILED
         click.echo('> Flake8: ok')
-    return OK
-
-
-def closure_linter(files):
-    if files:
-        click.echo('\n--- Closure Linter ---')
-        gjslint = run('gjslint --flagfile .gjslint %s %s' % (
-            '-r' if not files.endswith('.js') else '',
-            files
-        ))
-        if gjslint.returncode:
-            stderr.write('> Closure Linter: FAIL\n')
-            return CLOSURE_LINTER_FAILED
-        click.echo('> Closure Linter: ok')
     return OK
 
 
@@ -62,7 +47,7 @@ def codestyle(path, all):
         files = [f for f in files if os.path.isfile(f)]
         py_files = ' '.join(f for f in files if f.endswith('.py'))
         js_files = ' '.join(f for f in files if f.endswith(('.js', '.jsx')))
-    sys.exit(flake8(py_files) + closure_linter(js_files) + eslint(js_files))
+    sys.exit(flake8(py_files) + eslint(js_files))
 
 
 if __name__ == '__main__':
