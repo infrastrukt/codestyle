@@ -1,16 +1,12 @@
 {
-  "ecmaFeatures": {
-    "jsx": true
-  },
-  "plugins": [
-    "react"
-  ],
+  "extends": "eslint:recommended",
   "env": {
-    "browser": true,
-    "node": true
+    "browser": true
   },
+  "parser": "babel-eslint",
   "rules": {
-    "quotes": [1, "single"],
-    "react/jsx-uses-react": 1
+    "indent": [2, 2, {"SwitchCase": 1, "VariableDeclarator": 2}],
+    "max-len": [2, 80, 4],
+    "quotes": [2, "single"]
   }
 }
