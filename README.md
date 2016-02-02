@@ -5,9 +5,9 @@ and [ESLint](http://eslint.org).  Fully configurable and compatible with ES6 and
 
 ## Installation
 
-Get a [Docker](https://www.docker.com) if you don't have it yet. If you're on Mac or 
-Windows, you'll need a [Docker Machine](https://docs.docker.com/machine/) (works with 
-a number of  virtualization providers including VirtualBox, VMware Fusion, cloud providers, 
+Get a [Docker](https://www.docker.com) if you don't have it yet. If you're on Mac or
+Windows, you'll need a [Docker Machine](https://docs.docker.com/machine/) (works with
+a number of  virtualization providers including VirtualBox, VMware Fusion, cloud providers,
 etc.)  or [Boot2Docker](http://boot2docker.io) (VirtualBox only).
 
 Pull the image:
@@ -40,7 +40,7 @@ docker run -v $SRC_DIR/:/code/ --rm ivelum/codestyle:latest codestyle $*
 $ chmod +x codestyle.sh
 ```
 
-Now you can run codestyle checks using the script you just created (assuming 
+Now you can run codestyle checks using the script you just created (assuming
 that you're in project root):
 
 ```
@@ -57,16 +57,16 @@ $ ./codestyle.sh --changes
 
 ## Configuration
 
-Each tool in the package can be configured individually using its native 
-configuration files. You just need to create these files in your project 
+Each tool in the package can be configured individually using its native
+configuration files. You just need to create these files in your project
 root:
 
-* setup.cfg or tox.ini - configuration and ignore options for 
+* setup.cfg or tox.ini - configuration and ignore options for
   [Flake8](http://flake8.readthedocs.org/en/latest/config.html);
 * .eslintignore - [ignore file for ESLint](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories);
-* .eslintrc - [configuration file for ESLint](http://eslint.org/docs/user-guide/configuring).
+* .eslintrc.json - [configuration file for ESLint](http://eslint.org/docs/user-guide/configuring).
 
-For a quick start, check out our 
+For a quick start, check out our
 [sample configuration files](https://github.com/ivelum/codestyle/tree/master/samples).
 
 ## Add Git pre-commit hook
