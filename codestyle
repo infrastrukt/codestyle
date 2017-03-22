@@ -34,14 +34,18 @@ def eslint(files):
 
 @click.command()
 @click.argument('path', default='/code/')
-@click.option('--all/--changes', default=True,
-              help='Check all files (default) or changes only')
-def codestyle(path, all):
+@click.option('--all', 'changes', flag_value='all', default=True,
+              help='Check all files (default)')
+@click.option('--changes', 'changes', flag_value='changes',
+              help='Check only changed files')
+@click.option('--staged', 'changes', flag_value='staged',
+              help='Check only staged changes')
+def codestyle(path, changes):
     os.chdir(path)
     py_files = js_files = '.'
-    if not all:
-        diff = get_stdout('git diff --ignore-space-at-eol -- "*.py" "*.js" "*.jsx" | grep "[+][+][+]" | cut -c7-')
-        cached = get_stdout('git diff --cached --ignore-space-at-eol -- "*.py" "*.js" "*.jsx" | grep "[+][+][+]" | cut -c7-')
+    if changes != 'all':
+        diff = get_stdout(f'git diff {"--staged " if changes == "staged" else " "}--ignore-space-at-eol -- "*.py" "*.js" "*.jsx" | grep "[+][+][+]" | cut -c7-')
+        cached = get_stdout(f'git diff {"--staged " if changes == "staged" else " "}--cached --ignore-space-at-eol -- "*.py" "*.js" "*.jsx" | grep "[+][+][+]" | cut -c7-')
         files = set(diff.split('\n') + cached.split('\n'))
         # Exclude non-existent files
         files = [f for f in files if os.path.isfile(f)]
