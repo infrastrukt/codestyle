@@ -49,10 +49,10 @@ $ ./codestyle.sh
 
 By default, it checks all Python and JS files in your project tree. If your
 project has a Git repository, you can also run a faster check of uncommitted
-changes only:
+changes or staged changes only:
 
 ```
-$ ./codestyle.sh --changes
+$ ./codestyle.sh --changes | --staged
 ```
 
 ## Configuration
