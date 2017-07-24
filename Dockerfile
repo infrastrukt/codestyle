@@ -5,7 +5,7 @@ COPY package.json /tmp/
 
 RUN set -x \
     && apt-get update && apt-get install -y --no-install-recommends curl \
-    && curl -sL https://deb.nodesource.com/setup_7.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get update && apt-get install -y --no-install-recommends \
 		git \
 		nodejs \
